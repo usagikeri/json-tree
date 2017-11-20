@@ -1,7 +1,11 @@
 /**
  * Created by shinya on 2017/11/16.
  */
+
+package ohkura
+
 import com.google.gson.Gson
+import com.google.gson.JsonArray
 
 class Child(url: String, mine: String, source: String)  {
 
@@ -51,17 +55,19 @@ class Child(url: String, mine: String, source: String)  {
         }
 
     }
+
+    fun json_tree():String{
+       val g = Gson()
+
+        return g.toJson(this)
+    }
 }
 
 fun main(args: Array<String>){
     var c1 = Child("Parent_url","Parent_mime","Parent_source")
-
     var c2 = c1.add_child("Child_url","Child_mime","Child_source")
 
     c2.add_child("GChild_url","GChild_mime","GChild_source")
-    c1.tree_print()
 
-    var g = Gson()
-
-    println(g.toJson(c1))
+    println(c1.json_tree())
 }
